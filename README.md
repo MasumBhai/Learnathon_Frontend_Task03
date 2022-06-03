@@ -82,6 +82,11 @@ to create inline style & template together:
 ng g c <component_name> --inline-style --inline-template
 ```
 
+to add Material-UI:
+```bash
+ng add @angular/material
+```
+
 You can also use:
 
 ```bash
