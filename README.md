@@ -1,27 +1,159 @@
-# FrontendTask03
+# Learnathon Task03 Frontend (angular) part
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.5.
+## Code Explanation for future
+to install angular cli globally:
+```bash
+npm install -g @angular/cli
+```
+to check the version of angular:
 
-## Development server
+```bash
+ng version
+```
+to create new angular application:
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+```bash
+ng new <application_name>
+```
 
-## Code scaffolding
+inside the application folder:
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+```bash
+npm install -g npm
+```
 
-## Build
+to generate a new component:
+
+```bash
+ng g c <component_name>
+```
+
+to make the app.module.ts as the main app module file while creating component:
+
+```bash
+ng g c <component_name> --module app
+```
+
+to create directive:
+
+```bash
+ng g directive <directive-name>
+```
+
+to generate a new module:
+
+```bash
+ng g m <module_name>
+```
+
+to create multiple component inside module:
+
+```bash
+ng g c <module_name>/<component_name>
+```
+
+to create services inside module:
+
+```bash
+ng g service <module_name>/<service_name>
+```
+
+to create typescript class:
+
+```bash
+ng g class <class_name>
+```
+
+to create inline styling:
+
+```bash
+ng g c <component_name> --inline-style
+```
+
+to create inline template:
+
+```bash
+ng g c <component_name> --inline-template
+```
+
+to create inline style & template together:
+
+```bash
+ng g c <component_name> --inline-style --inline-template
+```
+
+You can also use:
+
+```bash
+ng generate directive|pipe|service|class|guard|interface|enum|module
+```
+
+## How to build
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-## Running unit tests
+## How to do unit tests
 
 Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-## Running end-to-end tests
+## How to do end-to-end tests
 
 Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
 
-## Further help
+## How to run
+
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+
+## Further Help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+## Screenshots
+
+![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+
+## Tech Stack
+
+**Client:** React, Redux, TailwindCSS
+
+**Server:** Node, Express
+
+## Deployment
+
+To deploy this project run
+
+```bash
+  npm run deploy
+```
+
+## Documentation
+
+[Documentation](https://docs.google.com/document/d/1aok0PPZw2ZqO7F74tU7SHv-wztoFhG5e1P7XcatPhOY/edit)
+
+## License
+
+MIT License
+
+Copyright (c) [2022] [Abdullah Al Masum]
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+## Feedback
+
+If you have any feedback, please reach out to me at abdullahmasum6035@gmail.com
