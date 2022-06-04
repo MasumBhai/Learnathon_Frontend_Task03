@@ -16,34 +16,41 @@
           <mat-card-title>Register</mat-card-title>
         </mat-card-header>
 
-        <form class="example-form">
+        <form class="example-form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
           <mat-card-content>
+
             <mat-form-field class="example-full-width" hintLabel="Max 24 characters">
-              <input matInput placeholder="Username" #nameBox maxlength="24" [formControl]="email" required>
+              <input matInput placeholder="Username" #nameBox maxlength="24" formControlName="username" required
+                     [ngClass]="{ 'is-invalid': submitted && f['username'].errors }">
               <mat-hint align="end">{{nameBox.value?.length || 0}}/24</mat-hint>
-              <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
-            </mat-form-field>
-            <mat-form-field class="example-full-width">
-              <input matInput placeholder="Email">
-            </mat-form-field>
-
-            <mat-form-field class="example-full-width">
-              <input matInput placeholder="Birth date select" type="date">
+              <ng-container>
+              <mat-error *ngIf="f['username'].errors['required']">userName Required</mat-error>
+              <mat-error *ngIf="f['username'].errors['maxlength']">Max Length exceeded</mat-error>
+              <mat-error *ngIf="f['username'].touched && f['username'].invalid ">fill it up</mat-error>
+              </ng-container>
             </mat-form-field>
 
             <mat-form-field class="example-full-width">
-              <input matInput [type]="hide ? 'password' : 'text'" placeholder="Password">
-              <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
-                      [attr.aria-pressed]="hide">
-                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+              <input matInput placeholder="Email" formControlName="email" required>
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Birth date select" type="date" formControlName="dateOfBirth" required>
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width">
+              <input matInput [type]="hide_pass ? 'password' : 'text'" placeholder="Password" formControlName="password" required>
+              <button mat-icon-button matSuffix (click)="hide_pass = !hide_pass" [attr.aria-label]="'Hide password'"
+                      [attr.aria-pressed]="hide_pass">
+                <mat-icon>{{hide_pass ? 'visibility_off' : 'visibility'}}</mat-icon>
               </button>
             </mat-form-field>
 
             <mat-form-field class="example-full-width">
-              <input matInput [type]="hide ? 'password' : 'text'" placeholder="Confirm Password">
-              <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
-                      [attr.aria-pressed]="hide">
-                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+              <input matInput [type]="hide_conf_pass ? 'password' : 'text'" placeholder="Confirm Password" required>
+              <button mat-icon-button matSuffix (click)="hide_conf_pass = !hide_conf_pass" [attr.aria-label]="'Hide password'"
+                      [attr.aria-pressed]="hide_conf_pass">
+                <mat-icon>{{hide_conf_pass ? 'visibility_off' : 'visibility'}}</mat-icon>
               </button>
             </mat-form-field>
 
