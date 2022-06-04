@@ -1,0 +1,33 @@
+<div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
+  <mat-accordion>
+    <mat-expansion-panel (opened)="panelOpenState = true"
+                         (closed)="panelOpenState = false">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Log-In Section
+        </mat-panel-title>
+        <mat-panel-description>
+          Learnathon Task 03
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+  <mat-card class="box">
+    <mat-card-header>
+      <mat-card-title>Log in</mat-card-title>
+    </mat-card-header>
+    <form class="example-form">
+      <mat-card-content>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Username">
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Password">
+        </mat-form-field>
+      </mat-card-content>
+      <button mat-raised-button color="accent" class="btn-block">Log in</button>
+    </form>
+  </mat-card>
+
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>
