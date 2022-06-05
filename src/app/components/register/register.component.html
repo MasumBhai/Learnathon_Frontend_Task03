@@ -21,13 +21,24 @@
 
             <mat-form-field class="example-full-width" hintLabel="Max 24 characters">
               <input matInput placeholder="Username" #nameBox maxlength="24" formControlName="username" required
-                     [ngClass]="{ 'is-invalid': submitted && f['username'].errors }">
+                     [ngClass]="{ 'is-invalid': submitted && f['username'].errors }" [errorStateMatcher]="matcher">
               <mat-hint align="end">{{nameBox.value?.length || 0}}/24</mat-hint>
-              <ng-container>
-              <mat-error *ngIf="f['username'].errors['required']">userName Required</mat-error>
-              <mat-error *ngIf="f['username'].errors['maxlength']">Max Length exceeded</mat-error>
-              <mat-error *ngIf="f['username'].touched && f['username'].invalid ">fill it up</mat-error>
-              </ng-container>
+              <mat-error>
+                <ng-container *ngFor="let error of errors(registerForm.get('username'))">
+                  {{ errorMessages[error] }} <br>
+                </ng-container>
+              </mat-error>
+<!--              <mat-error *ngIf="f['username'].invalid && (f['username'].dirty || f['username'].touched) && f['username'].errors['required']" class="alert">-->
+<!--                  Please enter username-->
+<!--              </mat-error>-->
+<!--              <mat-error *ngIf="f['username'].invalid && (f['username'].dirty || f['username'].touched) && f['username'].errors['maxlength']" class="alert">-->
+<!--                  Pleasscssfsfsfs-->
+<!--              </mat-error>-->
+<!--              <ng-container>-->
+<!--              <mat-error *ngIf="f['username'].errors['required']">userName Required</mat-error>-->
+<!--              <mat-error *ngIf="f['username'].errors['maxlength']">Max Length exceeded</mat-error>-->
+<!--              <mat-error *ngIf="f['username'].touched && f['username'].invalid ">fill it up</mat-error>-->
+<!--              </ng-container>-->
             </mat-form-field>
 
             <mat-form-field class="example-full-width">
@@ -37,6 +48,7 @@
             <mat-form-field class="example-full-width">
               <input matInput placeholder="Birth date select" type="date" formControlName="dateOfBirth" required>
             </mat-form-field>
+
 
             <mat-form-field class="example-full-width">
               <input matInput [type]="hide_pass ? 'password' : 'text'" placeholder="Password" formControlName="password" required>
