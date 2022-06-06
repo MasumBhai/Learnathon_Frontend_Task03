@@ -3,6 +3,8 @@ import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from "
 import {NgbDateStruct} from "@ng-bootstrap/ng-bootstrap";
 import Validation from "./validation";
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {RegistrationService} from "../../service/registration.service";
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-register',
@@ -11,7 +13,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 })
 export class RegisterComponent implements OnInit {
 
-  constructor(private formBuilder: FormBuilder, private http: HttpClient) {
+  constructor(private formBuilder: FormBuilder, private http: HttpClient,private userService: RegistrationService) {
   }
 
   model: any | NgbDateStruct;
@@ -23,7 +25,7 @@ export class RegisterComponent implements OnInit {
   form: FormGroup = new FormGroup({
     username: new FormControl(''),
     email: new FormControl(''),
-    dob: new FormControl(''),
+    birthday: new FormControl(''),
     password: new FormControl(''),
     confirmPassword: new FormControl(''),
   });
@@ -67,6 +69,23 @@ export class RegisterComponent implements OnInit {
     return this.form.controls;
   }
 
+  onReset(): void {
+    this.submitted = false;
+    this.form.reset();
+  }
+
+  private createUser() {
+    this.userService.create(this.form.value)
+      .pipe(first())
+      .subscribe(() => {
+        // this.alertService.success('User added', { keepAfterRouteChange: true });
+        // this.router.navigate(['../'], { relativeTo: this.route });
+        console.log(this.form.value)
+      })
+      // .add(() => this.loading = false);
+      .add(() => this.submitted = true);
+  }
+
   onSubmit(): void {
     this.submitted = true;
 
@@ -99,20 +118,19 @@ export class RegisterComponent implements OnInit {
       headers: new HttpHeaders({'Content-Type': 'application/json'})
     }
 
-    this.http
-      .post('http://three60.learnathon.net/api1/api/register', formData, httpOptions)
-      .subscribe({
-        next: (response) => console.log(response),
-        error: (error) => console.log(error),
-      });
+    // this.http
+    //   .post('http://three60.learnathon.net/api1/api/register', formData, httpOptions)
+    //   .subscribe({
+    //     next: (response) => console.log(response),
+    //     error: (error) => console.log(error),
+    //   });
 
     console.log(JSON.stringify(this.form.value, null, 2));
     // alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.form.value, null, 4));
+    this.createUser()
+    this.onReset()
   }
 
-  onReset(): void {
-    this.submitted = false;
-    this.form.reset();
-  }
+
 
 }
