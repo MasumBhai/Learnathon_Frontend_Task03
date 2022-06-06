@@ -40,10 +40,10 @@
             </mat-form-field>
 
             <mat-form-field class="example-full-width">
-              <input matInput placeholder="Birth date select" type="date" formControlName="dateOfBirth" [ngClass]="{ 'is-invalid': f['dateOfBirth'].errors }">
-              <mat-error *ngIf="f['dateOfBirth'].errors">
-                <mat-error *ngIf="f['dateOfBirth'].errors['required']">Date of Birth is required</mat-error>
-                <mat-error *ngIf="f['dateOfBirth'].errors['pattern']">Date of Birth must be a valid date in the format YYYY-MM-DD</mat-error>
+              <input matInput placeholder="Birth date select" type="date" formControlName="birthday" [ngClass]="{ 'is-invalid': f['birthday'].errors }">
+              <mat-error *ngIf="f['birthday'].errors">
+                <mat-error *ngIf="f['birthday'].errors['required']">Date of Birth is required</mat-error>
+<!--                <mat-error *ngIf="f['birthday'].errors['pattern']">Date of Birth must be a valid date in the format YYYY-MM-DD</mat-error>-->
               </mat-error>
             </mat-form-field>
 
@@ -56,7 +56,7 @@
               </button>
               <mat-error *ngIf="f['password'].errors">
                 <mat-error *ngIf="f['password'].errors['required']">Password is required</mat-error>
-                <mat-error *ngIf="f['password'].errors['minlength']">Password must be at least 6 characters</mat-error>
+                <mat-error *ngIf="f['password'].errors['minlength']">Password must be at least 8 characters</mat-error>
                 <mat-error *ngIf="f['password'].errors['maxlength']">Password must not exceed 40 characters</mat-error>
               </mat-error>
             </mat-form-field>

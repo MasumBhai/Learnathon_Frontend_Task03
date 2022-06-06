@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {NgbDateStruct} from "@ng-bootstrap/ng-bootstrap";
 import Validation from "./validation";
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 @Component({
   selector: 'app-register',
@@ -10,7 +11,8 @@ import Validation from "./validation";
 })
 export class RegisterComponent implements OnInit {
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(private formBuilder: FormBuilder, private http: HttpClient) {
+  }
 
   model: any | NgbDateStruct;
   panelOpenState = false;
@@ -39,12 +41,12 @@ export class RegisterComponent implements OnInit {
           ]
         ],
         email: ['', [Validators.required, Validators.email]],
-        dateOfBirth: ['', [Validators.required, Validators.pattern(/^\d{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])$/)]],
+        birthday: ['', [Validators.required]],
         password: [
           '',
           [
             Validators.required,
-            Validators.minLength(6),
+            Validators.minLength(8),
             Validators.maxLength(40)
           ]
         ],
@@ -56,9 +58,15 @@ export class RegisterComponent implements OnInit {
     );
   }
 
+  getDate(date: string) {
+    const a: string[] = date.split("-")
+    return new Date(parseInt(a[0]), parseInt(a[1]), parseInt(a[2]));
+  }
+
   get f(): { [key: string]: AbstractControl } {
     return this.form.controls;
   }
+
   onSubmit(): void {
     this.submitted = true;
 
@@ -66,9 +74,42 @@ export class RegisterComponent implements OnInit {
     //   return;
     // }
 
+    // @ts-ignore
+    const dob: Date = this.getDate(this.form.get('birthday').value)
+    const updatedDateofBirth: any = dob.getDate() + "/" + dob.getMonth() + "/" + dob.getFullYear()
+
+    // console.log(updatedDateofBirth)
+
+
+    var formData = new FormData();
+    // @ts-ignore
+    formData.append("username", this.form.get('username').value);
+    // @ts-ignore
+    formData.append("email", this.form.get('email').value);
+    // @ts-ignore
+    formData.append("birthday", this.form.get('birthday').value);
+    // formData.append("birthday", updatedDateofBirth);
+    // @ts-ignore
+    formData.append("password", this.form.get('password').value);
+    // @ts-ignore
+    formData.append("confirmPassword", this.form.get('confirmPassword').value);
+
+
+    const httpOptions = {
+      headers: new HttpHeaders({'Content-Type': 'application/json'})
+    }
+
+    this.http
+      .post('http://three60.learnathon.net/api1/api/register', formData, httpOptions)
+      .subscribe({
+        next: (response) => console.log(response),
+        error: (error) => console.log(error),
+      });
+
     console.log(JSON.stringify(this.form.value, null, 2));
-    alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.form.value, null, 4));
+    // alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.form.value, null, 4));
   }
+
   onReset(): void {
     this.submitted = false;
     this.form.reset();
