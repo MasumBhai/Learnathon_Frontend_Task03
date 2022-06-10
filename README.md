@@ -86,7 +86,29 @@ to add Material-UI:
 ```bash
 ng add @angular/material
 ```
+to add SweetAlert2:
+```bash
+npm install --save sweetalert2
+```
+& add the sweetalert2 path in ```angular.json``` file and
+```c
+"styles": [
+      "src/styles.css",
+      "./node_modules/sweetalert2/src/sweetalert2.scss"
+    ],
+```
 
+to add moment (for date manipulation):
+```bash
+npm install moment --save
+```
+inside `app.component.ts` file:
+```bash
+import * as moment from 'moment';
+age18Check(birthday: Date) {
+    return moment(birthday).add(18, 'years').format('YYYY-MM-DD') <= moment().format('YYYY-MM-DD');
+  }
+```
 You can also use:
 
 ```bash
@@ -107,7 +129,7 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 
 ## How to run
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Run `ng serve` or `ng serve --open` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
 ## Further Help
 
