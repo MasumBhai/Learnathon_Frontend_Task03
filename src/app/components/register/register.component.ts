@@ -2,9 +2,11 @@ import {Component, OnInit} from '@angular/core';
 import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {NgbDateStruct} from "@ng-bootstrap/ng-bootstrap";
 import Validation from "./validation";
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {RegistrationService} from "../../service/registration.service";
-import { first } from 'rxjs/operators';
+import {first} from 'rxjs/operators';
+import Swal from 'sweetalert2';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-register',
@@ -13,7 +15,7 @@ import { first } from 'rxjs/operators';
 })
 export class RegisterComponent implements OnInit {
 
-  constructor(private formBuilder: FormBuilder, private http: HttpClient,private userService: RegistrationService) {
+  constructor(private formBuilder: FormBuilder, private http: HttpClient, private userService: RegistrationService) {
   }
 
   model: any | NgbDateStruct;
@@ -32,6 +34,7 @@ export class RegisterComponent implements OnInit {
 
 
   ngOnInit(): void {
+    // @ts-ignore
     this.form = this.formBuilder.group(
       {
         username: [
@@ -55,7 +58,7 @@ export class RegisterComponent implements OnInit {
         confirmPassword: ['', Validators.required],
       },
       {
-        validators: [Validation.match('password', 'confirmPassword')]
+        validators: [Validation.match('password', 'confirmPassword')],
       }
     );
   }
@@ -74,50 +77,98 @@ export class RegisterComponent implements OnInit {
     this.form.reset();
   }
 
+  age18Check(birthday: Date) {
+    return moment(birthday).add(18, 'years').format('YYYY-MM-DD') <= moment().format('YYYY-MM-DD');
+  }
+
   private createUser() {
     this.userService.create(this.form.value)
       .pipe(first())
       .subscribe(() => {
+        Swal.fire({
+          title: 'Registration Complete',
+          text: 'You are cordially invited to support team360',
+          icon: 'success',
+          showClass: {
+            popup: 'animate__animated animate__fadeInDown'
+          },
+          hideClass: {
+            popup: 'animate__animated animate__fadeOutUp'
+          }
+        });
         // this.alertService.success('User added', { keepAfterRouteChange: true });
         // this.router.navigate(['../'], { relativeTo: this.route });
-        console.log(this.form.value)
+        // console.log(this.form.value)
+        this.onReset()
+      }, error => {
+        // console.log(error)
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong!',
+          footer: '<a href="#" target="_blank">Why do I have this issue?</a>',
+          showClass: {
+            popup: 'animate__animated animate__fadeInDown'
+          },
+          hideClass: {
+            popup: 'animate__animated animate__fadeOutUp'
+          }
+        })
       })
       // .add(() => this.loading = false);
       .add(() => this.submitted = true);
   }
 
   onSubmit(): void {
-    this.submitted = true;
+// @ts-ignore
+    if (this.age18Check(this.form.get('birthday').value)) {
+      this.createUser()
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Age must be 18+',
+        footer: '<a href="#" target="_blank">Why do I have this issue?</a>',
+        showClass: {
+          popup: 'animate__animated animate__fadeInDown'
+        },
+        hideClass: {
+          popup: 'animate__animated animate__fadeOutUp'
+        }
+      })
+      return
+    }
+
 
     // if (this.form.invalid) {
     //   return;
     // }
 
     // @ts-ignore
-    const dob: Date = this.getDate(this.form.get('birthday').value)
-    const updatedDateofBirth: any = dob.getDate() + "/" + dob.getMonth() + "/" + dob.getFullYear()
+    // const dob: Date = this.getDate(this.form.get('birthday').value)
+    // const updatedDateofBirth: any = dob.getDate() + "/" + dob.getMonth() + "/" + dob.getFullYear()
 
     // console.log(updatedDateofBirth)
 
 
-    var formData = new FormData();
-    // @ts-ignore
-    formData.append("username", this.form.get('username').value);
-    // @ts-ignore
-    formData.append("email", this.form.get('email').value);
-    // @ts-ignore
-    formData.append("birthday", this.form.get('birthday').value);
-    // formData.append("birthday", updatedDateofBirth);
-    // @ts-ignore
-    formData.append("password", this.form.get('password').value);
-    // @ts-ignore
-    formData.append("confirmPassword", this.form.get('confirmPassword').value);
+    // var formData = new FormData();
+    // // @ts-ignore
+    // formData.append("username", this.form.get('username').value);
+    // // @ts-ignore
+    // formData.append("email", this.form.get('email').value);
+    // // @ts-ignore
+    // formData.append("birthday", this.form.get('birthday').value);
+    // // formData.append("birthday", updatedDateofBirth);
+    // // @ts-ignore
+    // formData.append("password", this.form.get('password').value);
+    // // @ts-ignore
+    // formData.append("confirmPassword", this.form.get('confirmPassword').value);
 
-
-    const httpOptions = {
-      headers: new HttpHeaders({'Content-Type': 'application/json'})
-    }
-
+    //
+    // const httpOptions = {
+    //   headers: new HttpHeaders({'Content-Type': 'application/form-data'})
+    // }
+    //
     // this.http
     //   .post('http://three60.learnathon.net/api1/api/register', formData, httpOptions)
     //   .subscribe({
@@ -125,12 +176,8 @@ export class RegisterComponent implements OnInit {
     //     error: (error) => console.log(error),
     //   });
 
-    console.log(JSON.stringify(this.form.value, null, 2));
+    // console.log(JSON.stringify(this.form.value, null, 2));
     // alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.form.value, null, 4));
-    this.createUser()
-    this.onReset()
   }
-
-
 
 }
