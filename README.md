@@ -117,8 +117,8 @@ inside `app.component.ts` file:
 
 ```bash
 import * as moment from 'moment';
-age18Check(birthday: Date) {
-    return moment(birthday).add(18, 'years').format('YYYY-MM-DD') <= moment().format('YYYY-MM-DD');
+  age18Check(birthday: Date) {
+    return moment(birthday).add(18, 'years').format('DD/MM/YYYY') <= moment().format('DD/MM/YYYY');
   }
 ```
 
