@@ -117,7 +117,7 @@ ng generate directive|pipe|service|class|guard|interface|enum|module
 
 ## How to build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Run `ng build` to build the project. Or run `ng build --prod` command & before that set `environment.ts` files `production = true` The build artifacts will be stored in the `dist/` directory.
 
 ## How to do unit tests
 
@@ -134,7 +134,17 @@ Run `ng serve` or `ng serve --open` for a dev server. Navigate to `http://localh
 ## Further Help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
-
+## Budget error 
+In our angular.json, we should have a budgets keyword.
+```bash
+"budgets": [
+    {
+        "type": "initial",
+        "maximumWarning": "2mb",
+        "maximumError": "5mb"
+    }
+]
+```
 ## Screenshots
 
 ![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
