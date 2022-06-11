@@ -6,8 +6,9 @@
     </a>
   </div>
   <span class="nav-tool-items" #routerElement>
+    <a mat-button routerLink="show_user" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Users</a>
     <a mat-button routerLink="login" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" >Log in</a>
-    <a mat-button routerLink="register" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"  >Register</a>
+    <a mat-button routerLink="register" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Register</a>
   </span>
 </mat-toolbar>
 <router-outlet></router-outlet>

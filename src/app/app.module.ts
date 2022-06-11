@@ -9,13 +9,16 @@ import {FlexLayoutModule} from '@angular/flex-layout';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AppRoutingModule} from "./app-routing.module";
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import { HttpClientModule } from '@angular/common/http'
+import { HttpClientModule } from '@angular/common/http';
+import { ShowUserComponent } from './components/show-user/show-user.component'
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 @NgModule({
   declarations: [
     AppComponent,
     RegisterComponent,
-    LogInComponent
+    LogInComponent,
+    ShowUserComponent
   ],
   imports: [
     BrowserModule,
@@ -26,7 +29,8 @@ import { HttpClientModule } from '@angular/common/http'
     AppRoutingModule,
     AngularMaterialModule,
     NgbModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxDatatableModule
   ],
   providers: [],
   bootstrap: [AppComponent],

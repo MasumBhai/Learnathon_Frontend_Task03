@@ -109,6 +109,10 @@ import * as moment from 'moment';
     return moment(birthday).add(18, 'years').format('DD/MM/YYYY') <= moment().format('DD/MM/YYYY');
   }
 ```
+to add ngx-datatables
+```bash
+npm i @swimlane/ngx-datatable --save
+```
 You can also use:
 
 ```bash
