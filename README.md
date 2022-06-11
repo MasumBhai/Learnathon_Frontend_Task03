@@ -109,6 +109,10 @@ age18Check(birthday: Date) {
     return moment(birthday).add(18, 'years').format('YYYY-MM-DD') <= moment().format('YYYY-MM-DD');
   }
 ```
+to add ngx-datatables
+```bash
+npm i @swimlane/ngx-datatable --save
+```
 You can also use:
 
 ```bash

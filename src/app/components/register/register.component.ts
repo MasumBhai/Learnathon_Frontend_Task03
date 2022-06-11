@@ -87,7 +87,7 @@ export class RegisterComponent implements OnInit {
       .subscribe(() => {
         Swal.fire({
           title: 'Registration Complete',
-          text: 'You are cordially invited to support team360',
+          text: 'Thanks for the platform --regards team360',
           icon: 'success',
           showClass: {
             popup: 'animate__animated animate__fadeInDown'
@@ -105,7 +105,7 @@ export class RegisterComponent implements OnInit {
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
-          text: 'Something went wrong!',
+          text: 'UserName or Email already taken..!!',
           footer: '<a href="#" target="_blank">Why do I have this issue?</a>',
           showClass: {
             popup: 'animate__animated animate__fadeInDown'
