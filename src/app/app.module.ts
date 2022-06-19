@@ -12,6 +12,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
 import { ShowUserComponent } from './components/show-user/show-user.component'
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import {AuthService} from "./service/auth.service";
 
 @NgModule({
   declarations: [
@@ -32,7 +33,7 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
     HttpClientModule,
     NgxDatatableModule
   ],
-  providers: [],
+  providers: [AuthService], // AuthService needs to be globally accessed
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

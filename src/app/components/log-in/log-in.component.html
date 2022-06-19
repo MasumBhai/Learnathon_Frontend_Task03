@@ -1,59 +1,48 @@
 <div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
-    <mat-accordion>
-        <mat-expansion-panel (opened)="panelOpenState = true"
-                             (closed)="panelOpenState = false">
-            <mat-expansion-panel-header>
-                <mat-panel-title>
-                    Log-In Section
-                </mat-panel-title>
-                <mat-panel-description>
-                    Learnathon Task 03
-                </mat-panel-description>
-            </mat-expansion-panel-header>
-            
-            <mat-card class="box">
-                <mat-card-header>
-                    <mat-card-title>Log in</mat-card-title>
-                </mat-card-header>
-                <form class="example-form" [formGroup]="log_in_form">
-                    <mat-card-content>
-                        <mat-form-field class="example-full-width">
-                            <input matInput placeholder="Username" formControlName="log_user"
-                                   [ngClass]="{ 'is-invalid': f['log_user'].errors }">
-                            <mat-error *ngIf="f['log_user'].errors">
-                                <mat-error *ngIf="f['log_user'].errors['required']">Username is required</mat-error>
-                                <mat-error *ngIf="f['log_user'].errors['minlength']">Username must be at least 3
-                                    characters
-                                </mat-error>
-                                <mat-error *ngIf="f['log_user'].errors['maxlength']">Username must not exceed 24
-                                    characters
-                                </mat-error>
-                            </mat-error>
-                        </mat-form-field>
-                        <mat-form-field class="example-full-width">
-                            <input matInput [type]="hidePass ? 'password' : 'text'" placeholder="Password"
-                                   formControlName="log_password"
-                                   [ngClass]="{ 'is-invalid': f['log_password'].errors }">
-                            <button mat-icon-button matSuffix (click)="hidePass = !hidePass"
-                                    [attr.aria-label]="'Hide password'"
-                                    [attr.aria-pressed]="hidePass">
-                                <mat-icon>{{hidePass ? 'visibility_off' : 'visibility'}}</mat-icon>
-                            </button>
-                            <mat-error *ngIf="f['log_password'].errors">
-                                <mat-error *ngIf="f['log_password'].errors['required']">Password is required</mat-error>
-                                <mat-error *ngIf="f['log_password'].errors['minlength']">Password must be at least 8
-                                    characters
-                                </mat-error>
-                                <mat-error *ngIf="f['log_password'].errors['maxlength']">Password must not exceed 40
-                                    characters
-                                </mat-error>
-                            </mat-error>
-                        </mat-form-field>
-                    </mat-card-content>
-                    <button mat-raised-button color="accent" class="btn-block" (click)="LogInSubmit()">Log in</button>
-                </form>
-            </mat-card>
-        
-        </mat-expansion-panel>
-    </mat-accordion>
+  <mat-accordion>
+    <mat-expansion-panel (opened)="panelOpenState = true"
+                         (closed)="panelOpenState = false">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Log-In Section
+        </mat-panel-title>
+        <mat-panel-description>
+          Learnathon Task 03
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+  <mat-card class="box">
+    <mat-card-header>
+      <mat-card-title>Log in</mat-card-title>
+    </mat-card-header>
+    <form class="example-form" [formGroup]="log_in_form">
+      <mat-card-content>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Username" formControlName="log_user" [ngClass]="{ 'is-invalid': f['log_user'].errors }">
+          <mat-error *ngIf="f['log_user'].errors">
+            <mat-error *ngIf="f['log_user'].errors['required']">Username is required</mat-error>
+            <mat-error *ngIf="f['log_user'].errors['minlength']">Username must be at least 3 characters</mat-error>
+            <mat-error *ngIf="f['log_user'].errors['maxlength']">Username must not exceed 24 characters</mat-error>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <input matInput [type]="hidePass ? 'password' : 'text'" placeholder="Password" formControlName="log_password"
+                 [ngClass]="{ 'is-invalid': f['log_password'].errors }">
+          <button mat-icon-button matSuffix (click)="hidePass = !hidePass" [attr.aria-label]="'Hide password'"
+                  [attr.aria-pressed]="hidePass">
+            <mat-icon>{{hidePass ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+          <mat-error *ngIf="f['log_password'].errors">
+            <mat-error *ngIf="f['log_password'].errors['required']">Password is required</mat-error>
+            <mat-error *ngIf="f['log_password'].errors['minlength']">Password must be at least 8 characters</mat-error>
+            <mat-error *ngIf="f['log_password'].errors['maxlength']">Password must not exceed 40 characters</mat-error>
+          </mat-error>
+        </mat-form-field>
+      </mat-card-content>
+      <button mat-raised-button color="accent" class="btn-block" (click)="LogInSubmit()">Log in</button>
+    </form>
+  </mat-card>
+
+    </mat-expansion-panel>
+  </mat-accordion>
 </div>
