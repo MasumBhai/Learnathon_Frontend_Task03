@@ -9,6 +9,7 @@ const routes: Routes = [
   {path: 'login', component: LogInComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'show_user', component: ShowUserComponent}
+  // loadChildren:() => import('./login/login.module').then(_ => _.LoginModule)  // for lazy-loading of that module
 ];
 
 @NgModule({
