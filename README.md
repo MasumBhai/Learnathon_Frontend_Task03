@@ -1,15 +1,19 @@
 # Learnathon Task03 Frontend (angular) part
 
 ## Code Explanation for future
+
 to install angular cli globally:
+
 ```bash
 npm install -g @angular/cli
 ```
+
 to check the version of angular:
 
 ```bash
 ng version
 ```
+
 to create new angular application:
 
 ```bash
@@ -83,14 +87,19 @@ ng g c <component_name> --inline-style --inline-template
 ```
 
 to add Material-UI:
+
 ```bash
 ng add @angular/material
 ```
+
 to add SweetAlert2:
+
 ```bash
 npm install --save sweetalert2
 ```
+
 & add the sweetalert2 path in ```angular.json``` file and
+
 ```c
 "styles": [
       "src/styles.css",
@@ -99,20 +108,32 @@ npm install --save sweetalert2
 ```
 
 to add moment (for date manipulation):
+
 ```bash
 npm install moment --save
 ```
+
 inside `app.component.ts` file:
+
 ```bash
 import * as moment from 'moment';
 age18Check(birthday: Date) {
     return moment(birthday).add(18, 'years').format('YYYY-MM-DD') <= moment().format('YYYY-MM-DD');
   }
 ```
+
 to add ngx-datatables
+
 ```bash
 npm i @swimlane/ngx-datatable --save
 ```
+
+to add Angular JWT Library
+
+```bash
+npm i @auth0/angular-jwt --save
+```
+
 You can also use:
 
 ```bash
@@ -121,7 +142,8 @@ ng generate directive|pipe|service|class|guard|interface|enum|module
 
 ## How to build
 
-Run `ng build` to build the project. Or run `ng build --prod` command & before that set `environment.ts` files `production = true` The build artifacts will be stored in the `dist/` directory.
+Run `ng build` to build the project. Or run `ng build --prod` command & before that set `environment.ts`
+files `production = true` The build artifacts will be stored in the `dist/` directory.
 
 ## How to do unit tests
 
@@ -129,17 +151,23 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 
 ## How to do end-to-end tests
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a
+package that implements end-to-end testing capabilities.
 
 ## How to run
 
-Run `ng serve` or `ng serve --open` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Run `ng serve` or `ng serve --open` for a dev server. Navigate to `http://localhost:4200/`. The application will
+automatically reload if you change any of the source files.
 
 ## Further Help
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
-## Budget error 
+To get more help on the Angular CLI use `ng help` or go check out
+the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+## Budget error
+
 In our angular.json, we should have a budgets keyword.
+
 ```bash
 "budgets": [
     {
@@ -149,6 +177,7 @@ In our angular.json, we should have a budgets keyword.
     }
 ]
 ```
+
 ## Screenshots
 
 ![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
