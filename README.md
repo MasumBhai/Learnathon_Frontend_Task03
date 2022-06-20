@@ -133,6 +133,11 @@ to add Angular JWT Library
 ```bash
 npm i @auth0/angular-jwt --save
 ```
+to add Route Guard for applying before a route opens or closes<br/>
+The guard type can be `CanActivate`, `CanActivateChild`, `CanDeactivate` and `CanLoad`
+```bash
+ng g guard <guard_name>
+```
 
 You can also use:
 

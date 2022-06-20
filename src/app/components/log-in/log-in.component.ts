@@ -1,9 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {AuthService} from "../../service/auth.service";
+
 import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {BehaviorSubject, Observable, of} from "rxjs";
 import {map} from "rxjs/operators";
 import {JwtHelperService} from "@auth0/angular-jwt";
+import {Router} from "@angular/router";
+import {AuthService} from "../../service/auth.service";
 
 @Component({
   selector: 'app-log-in',
@@ -16,7 +18,7 @@ export class LogInComponent implements OnInit {
   hideConfPass: boolean = false;
   hidePass: boolean = false;
 
-  userInfo = new BehaviorSubject(null);
+  userInfo = new BehaviorSubject(null); // to store the user info decoded from the JWT access token
   jwtHelper = new JwtHelperService();
 
   log_in_form: FormGroup = new FormGroup({
@@ -24,7 +26,7 @@ export class LogInComponent implements OnInit {
     log_password: new FormControl(''),
   });
 
-  constructor(private formBuilder: FormBuilder, private authService: AuthService) {
+  constructor(private formBuilder: FormBuilder, private authService: AuthService, private router:Router) {
   }
 
   get f(): { [key: string]: AbstractControl } {
@@ -59,9 +61,10 @@ export class LogInComponent implements OnInit {
     console.log(JSON.stringify(this.log_in_form.value,null,2))
     this.authService.userLogin(this.log_in_form.value)
       .subscribe(
-        (value) => {
+        (value: boolean) => {
           if(value){
             alert('success');
+            this.router.navigate(["/show_user"]);
           }else{
             alert('failed');
           }

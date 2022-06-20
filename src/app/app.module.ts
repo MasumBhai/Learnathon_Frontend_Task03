@@ -13,6 +13,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ShowUserComponent } from './components/show-user/show-user.component'
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import {AuthService} from "./service/auth.service";
+import {AuthGuard} from "./guards/auth.guard";
 
 @NgModule({
   declarations: [
@@ -33,7 +34,7 @@ import {AuthService} from "./service/auth.service";
     HttpClientModule,
     NgxDatatableModule
   ],
-  providers: [AuthService], // AuthService needs to be globally accessed
+  providers: [AuthService,AuthGuard], // AuthService needs to be globally accessed
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
