@@ -25,18 +25,34 @@ load the user information in the 'AuthService' constructor.
   userLogin(login: any): Observable<boolean> {
     if (login && login.log_user && login.log_password) {
       // These lines are for mocked JWT token practice
-      const sampleJWT = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkJyYWlueV9Gb29sIiwicGFzc3dvcmQiOiJCb2xib19OYSJ9.eGR_PzuAwLoJGR8sEroPHDAcqQzLL8vM21MRKrDYygs";
+      // const sampleJWT = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkJyYWlueV9Gb29sIiwicGFzc3dvcmQiOiJCb2xib19OYSJ9.eGR_PzuAwLoJGR8sEroPHDAcqQzLL8vM21MRKrDYygs";
+      const sampleJWT = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlRlc3QiLCJzdWIiOjIsImlhdCI6MTYwNDMwOTc0OSwiZXhwIjoxNjA0MzA5ODA5fQ.jHez9kegJ7GT1AO5A2fQp6Dg9A6PBmeiDW1YPaCQoYs";
+
       const refreshToken = "dummy";
 
       return of(sampleJWT).pipe(
-        map((token) => {
+        map((token:any) => {
           if (!token) {
             return false;
           }
           localStorage.setItem("access_token", token); // For SPA, common approach to store, the token is in browser local storage.
           const decodedUser = this.jwtHelper.decodeToken(token);
+          //
+          // //todo: change here
+          // const data:any = {
+          //   access_token: token.access_token,
+          //   refresh_token: token.refresh_token,
+          //   log_user: decodedUser.username,
+          //   log_password:decodedUser.password,
+          //   userid: decodedUser.id,
+          //   tokenExpiration: decodedUser.exp,
+          // }
+          //
+          // this.userInfo.next(data);
+          // console.log(data)  // we can manipulate the keys of JWT token
+          // console.log(decodedUser) // this directly fetch from JWT token
+
           this.userInfo.next(decodedUser);
-          // console.log(decodedUser)
           return true;
         }));
 
@@ -49,6 +65,7 @@ load the user information in the 'AuthService' constructor.
       //     }
       //     localStorage.setItem('access_token', data.access_token); // this method is vulnerable to XSS attack
       //     const decodedUser = this.jwtHelper.decodeToken(data.access_token);
+      //     console.log(decodedUser)
       //     this.userInfo.next(decodedUser);
       //     return true;
       //   })
