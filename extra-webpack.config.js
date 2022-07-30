@@ -1,5 +1,5 @@
 module.exports = {
-  optimization: {
-    concatenateModules: false
-  }
+    optimization: {
+        concatenateModules: false
+    }
 };

@@ -1,7 +1,7 @@
-import { AllUser } from './all-user';
+import {AllUser} from './all-user';
 
 describe('AllUser', () => {
-  it('should create an instance', () => {
-    expect(new AllUser()).toBeTruthy();
-  });
+    it('should create an instance', () => {
+        expect(new AllUser()).toBeTruthy();
+    });
 });
