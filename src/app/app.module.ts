@@ -9,33 +9,34 @@ import {FlexLayoutModule} from '@angular/flex-layout';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AppRoutingModule} from "./app-routing.module";
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import { HttpClientModule } from '@angular/common/http';
-import { ShowUserComponent } from './components/show-user/show-user.component'
-import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import {HttpClientModule} from '@angular/common/http';
+import {ShowUserComponent} from './components/show-user/show-user.component'
+import {NgxDatatableModule} from '@swimlane/ngx-datatable';
 import {AuthService} from "./service/auth.service";
+import {AuthGuard} from "./guards/auth.guard";
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    RegisterComponent,
-    LogInComponent,
-    ShowUserComponent
-  ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    FlexLayoutModule,
-    FormsModule,
-    ReactiveFormsModule,
-    AppRoutingModule,
-    AngularMaterialModule,
-    NgbModule,
-    HttpClientModule,
-    NgxDatatableModule
-  ],
-  providers: [AuthService], // AuthService needs to be globally accessed
-  bootstrap: [AppComponent],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+    declarations: [
+        AppComponent,
+        RegisterComponent,
+        LogInComponent,
+        ShowUserComponent
+    ],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        FlexLayoutModule,
+        FormsModule,
+        ReactiveFormsModule,
+        AppRoutingModule,
+        AngularMaterialModule,
+        NgbModule,
+        HttpClientModule,
+        NgxDatatableModule
+    ],
+    providers: [AuthService, AuthGuard], // AuthService needs to be globally accessed
+    bootstrap: [AppComponent],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule {
 }
