@@ -4,8 +4,8 @@ import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from "
 import {BehaviorSubject} from "rxjs";
 import {JwtHelperService} from "@auth0/angular-jwt";
 import {Router} from "@angular/router";
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import configUrl from '../../../assets/api_config/api_configuration.json';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {environment} from "../../../environments/environment";
 
 
 @Component({
@@ -17,8 +17,9 @@ export class LogInComponent implements OnInit {
     
     private jwtHelper: JwtHelperService = new JwtHelperService();
     
-    url = configUrl.apiServer.url + '/api/authentication/';
-    invalidLogin?: boolean;
+    // url = configUrl.apiServer.url + '/api/authentication/';
+    url = environment.apiUrl + '/login/';
+    invalidLogin?: boolean = false;
     panelOpenState: boolean = false;
     submitted = false;
     hideConfPass: boolean = false;
@@ -71,14 +72,18 @@ export class LogInComponent implements OnInit {
                 "Content-Type": "application/json"
             })
         }).subscribe(response => {
-            const token = (<any>response).token;
-            localStorage.setItem("jwt", token);
-            this.invalidLogin = false;
             alert("Logged In successfully");
+            const token = (<any>response).token;
+            const refreshToken = (<any>response).refreshToken;
+            localStorage.setItem("accessToken", token);
+            localStorage.setItem("refreshToken", refreshToken);
+            this.invalidLogin = false;
+            this.invalidLogin = false;
             this.router.navigate(["/show_user"]);
         }, err => {
+            console.error(err)
             alert('Login Credentials didn\'t match. ');
             this.invalidLogin = true;
-        });
+        }, () => console.info('Login Complete & Look into localStorage'));
     }
 }

@@ -7,6 +7,8 @@ import {RegistrationService} from "../../service/registration.service";
 import {first} from 'rxjs/operators';
 import Swal from 'sweetalert2';
 import * as moment from 'moment';
+import {environment} from "../../../environments/environment";
+import {Router} from "@angular/router";
 
 @Component({
     selector: 'app-register',
@@ -15,9 +17,11 @@ import * as moment from 'moment';
 })
 export class RegisterComponent implements OnInit {
     
-    constructor(private formBuilder: FormBuilder, private http: HttpClient, private userService: RegistrationService) {
+    constructor(private formBuilder: FormBuilder, private http: HttpClient, private router: Router) {
     }
     
+    url = environment.apiUrl + '/register/';
+    invalidRegister?: boolean = false;
     model: any | NgbDateStruct;
     panelOpenState = false;
     submitted = false;
@@ -82,10 +86,15 @@ export class RegisterComponent implements OnInit {
     }
     
     private createUser() {
-        this.userService.create(this.form.value)
+        const registerModel = JSON.stringify(this.form.value);
+        this.http.post(this.url, registerModel)
         .pipe(first())
         .subscribe(() => {
-            Swal.fire({
+            this.invalidRegister = false;
+            
+            // this.alertService.success('User added', { keepAfterRouteChange: true });
+            // this.router.navigate(['../'], { relativeTo: this.route });
+            this.router.navigate(["/login"]).then(() => Swal.fire({
                 title: 'Registration Complete',
                 text: 'Thanks for the platform --regards team360',
                 icon: 'success',
@@ -95,13 +104,12 @@ export class RegisterComponent implements OnInit {
                 hideClass: {
                     popup: 'animate__animated animate__fadeOutUp'
                 }
-            });
-            // this.alertService.success('User added', { keepAfterRouteChange: true });
-            // this.router.navigate(['../'], { relativeTo: this.route });
+            }));
             // console.log(this.form.value)
             this.onReset()
         }, error => {
             // console.log(error)
+            this.invalidRegister = true;
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
@@ -114,7 +122,7 @@ export class RegisterComponent implements OnInit {
                     popup: 'animate__animated animate__fadeOutUp'
                 }
             })
-        })
+        }, () => console.info('Registration complete'))
         // .add(() => this.loading = false);
         .add(() => this.submitted = true);
     }

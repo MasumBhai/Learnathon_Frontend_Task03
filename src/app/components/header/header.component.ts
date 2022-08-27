@@ -14,7 +14,7 @@ export class HeaderComponent implements OnInit {
   }
 
   isUserAuthenticated() {
-    const token = localStorage.getItem("jwt");
+    const token: string | null = localStorage.getItem("accessToken");
     if (token && !this.jwtHelper.isTokenExpired(token)) {
       return true;
     }
@@ -22,10 +22,11 @@ export class HeaderComponent implements OnInit {
       return false;
     }
   }
-
+  
   public logOut = () => {
-    localStorage.removeItem("jwt");
-    alert("You have been Logged Out")
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("refreshToken");
+    this.router.navigate(["login"]).then(() => alert("You have been Logged Out"));
   }
 
   ngOnInit(): void {
