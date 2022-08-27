@@ -14,13 +14,24 @@ import {ShowUserComponent} from './components/show-user/show-user.component'
 import {NgxDatatableModule} from '@swimlane/ngx-datatable';
 import {AuthService} from "./service/auth.service";
 import {AuthGuard} from "./guards/auth.guard";
+import { HeaderComponent } from './components/header/header.component';
+import {JwtAuthGuard} from "./guards/jwt-auth-guard";
+import {JwtModule} from "@auth0/angular-jwt";
+import apiUrlLink from '../assets/api_config/api_configuration.json'
+
+const api_url = apiUrlLink.apiServer.url;
+//function is use to get jwt token from local storage
+export function tokenGetter() {
+    return localStorage.getItem("jwt");
+}
 
 @NgModule({
     declarations: [
         AppComponent,
         RegisterComponent,
         LogInComponent,
-        ShowUserComponent
+        ShowUserComponent,
+        HeaderComponent
     ],
     imports: [
         BrowserModule,
@@ -32,9 +43,16 @@ import {AuthGuard} from "./guards/auth.guard";
         AngularMaterialModule,
         NgbModule,
         HttpClientModule,
-        NgxDatatableModule
+        NgxDatatableModule,
+        JwtModule.forRoot({
+            config: {
+                tokenGetter: tokenGetter,
+                allowedDomains: [api_url],
+                disallowedRoutes: []
+            }
+        }),
     ],
-    providers: [AuthService, AuthGuard], // AuthService needs to be globally accessed
+    providers: [ JwtAuthGuard], // AuthService needs to be globally accessed
     bootstrap: [AppComponent],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

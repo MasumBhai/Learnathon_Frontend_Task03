@@ -1,0 +1,13 @@
+<mat-toolbar color="primary" class="app-header">
+    <div>
+        <a href="https://bitbucket.org/learnathon-2022/three60/src/Task03/" target="_blank" class="teamThree60">
+            Team: Three60
+        </a>
+    </div>
+    <span class="nav-tool-items" #routerElement>
+    <a *ngIf="isUserAuthenticated()" mat-button routerLink="show_user" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Users</a>
+    <a *ngIf="!isUserAuthenticated()" mat-button routerLink="login" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Log in</a>
+    <a *ngIf="isUserAuthenticated()" mat-button (click)="logOut()">Log Out</a>
+    <a mat-button routerLink="register" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Register</a>
+  </span>
+</mat-toolbar>

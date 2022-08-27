@@ -15,7 +15,7 @@
                 <mat-card-header>
                     <mat-card-title>Log in</mat-card-title>
                 </mat-card-header>
-                <form class="example-form" [formGroup]="log_in_form">
+                <form class="example-form" [formGroup]="log_in_form" (ngSubmit)="LogInSubmit()">
                     <mat-card-content>
                         <mat-form-field class="example-full-width">
                             <input matInput placeholder="Username" formControlName="log_user"
@@ -50,7 +50,7 @@
                             </mat-error>
                         </mat-form-field>
                     </mat-card-content>
-                    <button mat-raised-button color="accent" class="btn-block" (click)="LogInSubmit()">Log in</button>
+                    <button mat-raised-button color="accent" class="btn-block">Log in</button>
                 </form>
             </mat-card>
         

@@ -1,16 +1,19 @@
 import {Injectable} from '@angular/core';
-import {BehaviorSubject, Observable, of} from 'rxjs';
+import {BehaviorSubject, Observable, of, Subscription} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {JwtHelperService} from "@auth0/angular-jwt";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
+import configUrl from '../../assets/api_config/api_configuration.json';
 
 @Injectable({
     providedIn: 'root'
 })
 export class AuthService {
     
+    url = configUrl.apiServer.url + '/api/authentication/';
     userInfo = new BehaviorSubject(null); // will be used by the route guard to verify the user is login or not in later part
     jwtHelper = new JwtHelperService();
+    invalidLogin?: boolean;
     
     /*
   Because if an application closes and reopens all variables will be empty if that the case route guard unable to read
@@ -19,11 +22,11 @@ export class AuthService {
   */
     
     constructor(private http: HttpClient) {
-        this.loadUserInfo();
+        // this.loadUserInfo();
     }
     
-    userLogin(login: any): Observable<boolean> {
-        if (login && login.log_user && login.log_password) {
+    userLogin(credentials: any): Observable<boolean> {
+        if (credentials && credentials.log_user && credentials.log_password) {
             // // These lines are for mocked JWT token practice
             // // const sampleJWT = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkJyYWlueV9Gb29sIiwicGFzc3dvcmQiOiJCb2xib19OYSJ9.eGR_PzuAwLoJGR8sEroPHDAcqQzLL8vM21MRKrDYygs";
             // const sampleJWT = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlRlc3QiLCJzdWIiOjIsImlhdCI6MTYwNDMwOTc0OSwiZXhwIjoxNjA0MzA5ODA5fQ.jHez9kegJ7GT1AO5A2fQp6Dg9A6PBmeiDW1YPaCQoYs";
@@ -53,22 +56,26 @@ export class AuthService {
             //     // console.log(decodedUser) // this directly fetch from JWT token
             //
             //     this.userInfo.next(decodedUser);
-            //     return true;
+            //     retu
+            //     rn true;
             //   }));
             
             
             // to use the API endpoint for user login in the AuthService
-            return this.http.post("http://localhost:3000/auth/login", login).pipe( //todo: change url of the token api server
+            return this.http.post(this.url, credentials).pipe( //todo: change url of the token api server
                 map((data: any) => {
                     if (!data) {
                         return false;
                     }
-                    localStorage.setItem('access_token', data.access_token); // this method is vulnerable to XSS attack
-                    localStorage.setItem('refresh_token', data.refresh_token);
-                    const decodedUser = this.jwtHelper.decodeToken(data.access_token);
-                    console.log(decodedUser)
-                    localStorage.setItem('expiration', decodedUser.exp); //  Store jwt 'access_token' expiration value in local storage so that it can be used for deciding to call refresh token API
-                    this.userInfo.next(decodedUser);
+                    const token = data.token;
+                    localStorage.setItem("jwt", token); // this method is vulnerable to XSS attack
+                    
+                    // localStorage.setItem('access_token', data.access_token); // this method is vulnerable to XSS attack
+                    // localStorage.setItem('refresh_token', data.refresh_token);
+                    // const decodedUser = this.jwtHelper.decodeToken(data.access_token);
+                    // console.log(decodedUser)
+                    // localStorage.setItem('expiration', decodedUser.exp); //  Store jwt 'access_token' expiration value in local storage so that it can be used for deciding to call refresh token API
+                    // this.userInfo.next(decodedUser);
                     return true;
                 })
             );

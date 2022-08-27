@@ -147,6 +147,13 @@ You can also use:
 ng generate directive|pipe|service|class|guard|interface|enum|module
 ```
 
+to import content form json file<br>
+add the following inside `tsconfig.json` file
+```bash
+"allowSyntheticDefaultImports" : true,
+"resolveJsonModule" : true,
+```
+
 ## How to build
 
 Run `ng build` to build the project. Or run `ng build --prod` command & before that set `environment.ts`
@@ -173,7 +180,7 @@ the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
 
 ## Budget error
 
-In our angular.json, we should have a budgets keyword.
+In our angular.json, we should have the budget's keyword.
 
 ```bash
 "budgets": [
@@ -225,7 +232,7 @@ copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
