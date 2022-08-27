@@ -15,9 +15,9 @@ import {NgxDatatableModule} from '@swimlane/ngx-datatable';
 import { HeaderComponent } from './components/header/header.component';
 import {JwtAuthGuard} from "./guards/jwt-auth-guard";
 import {JwtInterceptor, JwtModule} from "@auth0/angular-jwt";
-import apiUrlLink from '../assets/api_config/api_configuration.json'
+import {environment} from "../environments/environment";
 
-const api_url = apiUrlLink.apiServer.url;
+const api_url = environment.apiUrl;
 //function is used to get jwt token from local storage
 export function tokenGetter() {
     return localStorage.getItem("jwt");

@@ -3,7 +3,6 @@ import {RouterModule, Routes} from '@angular/router';
 import {LogInComponent} from './components/log-in/log-in.component';
 import {RegisterComponent} from './components/register/register.component';
 import {ShowUserComponent} from "./components/show-user/show-user.component";
-import {AuthGuard} from "./guards/auth.guard";
 import {JwtAuthGuard} from "./guards/jwt-auth-guard";
 
 const routes: Routes = [
