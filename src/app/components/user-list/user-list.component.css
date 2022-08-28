@@ -1,0 +1,57 @@
+ngx-datatable {
+    border-radius: 8px;
+    margin: auto;
+}
+
+.content-heading h2 {
+    text-align: center;
+}
+
+.text-left button{
+    margin-right: 10px;
+}
+
+@media only screen and (max-width: 450px) {
+    .element-per-page {
+        display: inline;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+        position: relative;
+        bottom: 2.35rem;
+        left: 4rem;
+    }
+
+    .element-per-page span {
+        display: none;
+    }
+
+    .element-per-page input {
+        display: inline;
+        width: 3rem;
+    }
+}
+
+@media only screen and (min-width: 630px) {
+    .element-per-page {
+        display: inline;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+        position: relative;
+        bottom: 2.35rem;
+        left: 6rem;
+    }
+
+    .element-per-page span {
+        color: black;
+        display: inline;
+        width: 120px;
+        margin-right: 10px;
+    }
+
+    .element-per-page input {
+        display: inline;
+        width: 5rem;
+    }
+}

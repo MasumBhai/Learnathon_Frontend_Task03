@@ -1,0 +1,48 @@
+<div class="content-heading">
+    <h2>All Registered Users</h2>
+</div>
+<mat-card-content>
+    <ngx-datatable
+            class='material no-detail-row'
+            [columnMode]="'force'"
+            [headerHeight]="50"
+            [footerHeight]="50"
+            [rowHeight]="'auto'"
+            [rows]='rows'
+            [count]="totalCount"
+            [limit]="dataParams.page_size"
+    >
+        <ngx-datatable-column name="Sl no" [maxWidth]="100">
+            <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
+                <small>{{row.serialNo}}</small>
+            </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Username" prop="username"></ngx-datatable-column>
+        <ngx-datatable-column name="Email" prop="email"></ngx-datatable-column>
+        <ngx-datatable-column name="Date of Birth" prop="dateOfBirth"></ngx-datatable-column>
+        <ngx-datatable-column name="Action" [maxWidth]="200">
+            <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
+                <div class="text-left">
+                    <button (click)="editClicked(row)" mat-icon-button color="accent" matTooltip="Edit This User"
+                            aria-label="Edit Option">
+                        <mat-icon>edit</mat-icon>
+                        
+                    </button>
+                    
+                    <button (click)="deleteClicked(row)" mat-icon-button color="accent" matTooltip="Delete This User"
+                            aria-label="Delete Option">
+                        <mat-icon>delete_forever</mat-icon>
+                    </button>
+                
+                </div>
+            </ng-template>
+        </ngx-datatable-column>
+    </ngx-datatable>
+    
+    <div class="element-per-page">
+        <span>Elements / Page</span>
+        <input (change)="elementsPerPageToggled()" type="number" [(ngModel)]="dataParams.page_size"
+               [value]="dataParams.page_size"/>
+    </div>
+
+</mat-card-content>

@@ -16,6 +16,7 @@ import { HeaderComponent } from './components/header/header.component';
 import {JwtAuthGuard} from "./guards/jwt-auth-guard";
 import {JwtInterceptor, JwtModule} from "@auth0/angular-jwt";
 import {environment} from "../environments/environment";
+import { UserListComponent } from './components/user-list/user-list.component';
 
 const api_url = environment.apiUrl;
 //function is used to get jwt token from local storage
@@ -29,7 +30,8 @@ export function tokenGetter() {
         RegisterComponent,
         LogInComponent,
         ShowUserComponent,
-        HeaderComponent
+        HeaderComponent,
+        UserListComponent
     ],
     imports: [
         BrowserModule,

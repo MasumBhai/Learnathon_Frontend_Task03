@@ -30,6 +30,8 @@ to generate a new component:
 
 ```bash
 ng g c <component_name>
+ng g c <component_name> --module <module-name> --skipTest=true 
+
 ```
 
 to make the app.module.ts as the main app module file while creating component:
